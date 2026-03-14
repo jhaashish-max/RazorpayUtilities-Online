@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Freshdesk P1 Defense Command</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Orbitron:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: #030810;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* ===== CANVAS WRAPPER ===== */
+        #canvas-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* CRT Scanlines overlay */
+        #canvas-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.03) 2px,
+                    rgba(0, 0, 0, 0.03) 4px);
+            z-index: 1;
+        }
+
+        /* Vignette */
+        #canvas-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(3, 8, 16, 0.7) 100%);
+            z-index: 2;
+        }
+
+        /* ===== UI OVERLAY ===== */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px 24px;
+            z-index: 10;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .title-block h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 22px;
+            letter-spacing: 3px;
+            color: #38bdf8;
+            text-shadow:
+                0 0 10px rgba(56, 189, 248, 0.6),
+                0 0 30px rgba(56, 189, 248, 0.2);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.2);
+            }
+
+            50% {
+                text-shadow: 0 0 15px rgba(56, 189, 248, 0.8), 0 0 40px rgba(56, 189, 248, 0.4), 0 0 60px rgba(56, 189, 248, 0.1);
+            }
+        }
+
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #22c55e;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 6px #22c55e;
+            animation: livePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 6px #22c55e;
+            }
+
+            50% {
+                opacity: 0.4;
+                box-shadow: 0 0 2px #22c55e;
+            }
+        }
+
+        .subtitle {
+            font-size: 10px;
+            color: #475569;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .clock-display {
+            font-size: 10px;
+            color: #64748b;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* ===== STATS PANEL ===== */
+        .stats-panel {
+            display: flex;
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 10px 16px;
+            min-width: 110px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .stat-card.active::before {
+            background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+        }
+
+        .stat-card.breach::before {
+            background: linear-gradient(90deg, transparent, #ef4444, transparent);
+        }
+
+        .stat-card.safe::before {
+            background: linear-gradient(90deg, transparent, #22c55e, transparent);
+        }
+
+        .stat-card.paused::before {
+            background: linear-gradient(90deg, transparent, #0ea5e9, transparent);
+        }
+
+        .stat-icon {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: #64748b;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-val {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .stat-val.active-val {
+            color: #f59e0b;
+            text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+        }
+
+        .stat-val.breach-val {
+            color: #ef4444;
+            text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+        }
+
+        .stat-val.safe-val {
+            color: #22c55e;
+            text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+        }
+
+        .stat-val.paused-val {
+            color: #0ea5e9;
+            text-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        /* ===== LEGEND ===== */
+        .legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #94a3b8;
+            padding: 4px 10px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+        }
+
+        .legend-item:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .legend-dot.breach {
+            background: #ef4444;
+            box-shadow: 0 0 8px #ef4444, 0 0 16px rgba(239, 68, 68, 0.3);
+        }
+
+        .legend-dot.active {
+            background: #f59e0b;
+            box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+        }
+
+        .legend-dot.frozen {
+            background: #0ea5e9;
+            box-shadow: 0 0 6px rgba(14, 165, 233, 0.5);
+        }
+
+        .legend-dot.given {
+            background: #22c55e;
+            box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+        }
+
+        .sync-badge {
+            font-size: 10px;
+            color: #475569;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(4px);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== LOADING SCREEN ===== */
+        #loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #030810;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        #loading-overlay.hidden {
+            opacity: 0;
+            transform: scale(1.02);
+            pointer-events: none;
+        }
+
+        .load-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            color: #38bdf8;
+            letter-spacing: 6px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .loader-ring {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(56, 189, 248, 0.1);
+            border-top: 3px solid #38bdf8;
+            border-right: 3px solid rgba(56, 189, 248, 0.4);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 24px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .load-status {
+            font-size: 12px;
+            color: #64748b;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            min-height: 1.5em;
+        }
+
+        .load-bar-track {
+            width: 200px;
+            height: 2px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 2px;
+            margin-top: 16px;
+            overflow: hidden;
+        }
+
+        .load-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        /* Grid pattern behind loading */
+        .load-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridDrift 20s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(40px, 40px);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 800px) {
+            .stats-panel {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .stat-card {
+                min-width: 80px;
+                padding: 8px 10px;
+            }
+
+            .stat-val {
+                font-size: 18px;
+            }
+
+            .title-block h1 {
+                font-size: 16px;
+            }
+
+            .legend {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading-overlay">
+        <div class="load-grid"></div>
+        <div class="load-title">P1 DEFENSE GRID</div>
+        <div class="loader-ring"></div>
+        <div class="load-status" id="load-status">INITIALIZING SYSTEMS</div>
+        <div class="load-bar-track">
+            <div class="load-bar-fill" id="load-bar"></div>
+        </div>
+    </div>
+
+    <!-- CANVAS -->
+    <div id="canvas-wrapper">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- UI OVERLAY -->
+    <div id="ui-layer">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <div class="title-row">
+                    <h1>P1 DEFENSE GRID</h1>
+                    <div class="live-badge">
+                        <div class="live-dot"></div>
+                        LIVE
+                    </div>
+                </div>
+                <div class="subtitle">SLA THREAT MONITORING SYSTEM</div>
+                <div class="clock-display" id="ist-clock"></div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-card active">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-label">THREATS</div>
+                    <div class="stat-val active-val" id="count-active">0</div>
+                </div>
+                <div class="stat-card breach">
+                    <div class="stat-icon">💀</div>
+                    <div class="stat-label">BREACHES</div>
+                    <div class="stat-val breach-val" id="count-breach">0</div>
+                </div>
+                <div class="stat-card safe">
+                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-label">NEUTRALIZED</div>
+                    <div class="stat-val safe-val" id="count-safe">0</div>
+                </div>
+                <div class="stat-card paused">
+                    <div class="stat-icon">❄️</div>
+                    <div class="stat-label">FROZEN</div>
+                    <div class="stat-val paused-val" id="count-paused">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="legend">
+                <div class="legend-item" title="SLA breach is imminent or has occurred">
+                    <div class="legend-dot breach"></div>Breach Imminent
+                </div>
+                <div class="legend-item" title="Active P1 ticket being tracked">
+                    <div class="legend-dot active"></div>Active Ticket
+                </div>
+                <div class="legend-item" title="Ticket paused — Waiting on Customer">
+                    <div class="legend-dot frozen"></div>Paused (WOC)
+                </div>
+                <div class="legend-item" title="P1 promise has been given">
+                    <div class="legend-dot given"></div>P1 Given
+                </div>
+            </div>
+            <div class="sync-badge" id="sync-badge">SYNCED: --:--</div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,286 @@
+/* Modal Overlay - Now Side Panel (Non-blocking) */
+#transfer-modal-overlay {
+    position: fixed;
+    top: 100px;
+    right: 350px;
+    /* To left of standard sidebar */
+    width: 500px;
+    max-height: 80vh;
+    z-index: 999;
+    /* Lower than highest but above content */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    pointer-events: auto;
+    /* Allow interaction with standard background */
+    background: transparent;
+    /* No dark overlay */
+    backdrop-filter: none;
+}
+
+#transfer-modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Modal Header */
+#transfer-modal-header {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+    color: white;
+    flex-shrink: 0;
+    cursor: grab;
+    /* Indicates draggable */
+}
+
+#transfer-modal-header:active {
+    cursor: grabbing;
+}
+
+#transfer-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Modal Body - Scrollable */
+#transfer-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    max-height: calc(85vh - 130px);
+}
+
+/* Scrollbar Styling */
+#transfer-modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+#transfer-modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#transfer-modal-body::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#transfer-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Footer */
+#transfer-modal-footer {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+/* Buttons */
+.transfer-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.transfer-btn:hover {
+    transform: translateY(-1px);
+}
+
+.transfer-btn-secondary {
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+.transfer-btn-secondary:hover {
+    background-color: #cbd5e1;
+}
+
+.transfer-btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.transfer-btn-primary:hover {
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+}
+
+.transfer-btn-primary:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Form Grid Layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-grid .form-field-wrapper.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Form Fields */
+.form-field-wrapper {
+    margin-bottom: 14px;
+}
+
+.form-field-wrapper label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px;
+    color: #374151;
+    font-size: 13px;
+}
+
+.form-field-wrapper input[type="text"],
+.form-field-wrapper textarea,
+.form-field-wrapper select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.form-field-wrapper input[type="text"]:focus,
+.form-field-wrapper textarea:focus,
+.form-field-wrapper select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-field-wrapper textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+/* Sub-group styling */
+.sub-group {
+    margin-top: 12px;
+    padding: 14px;
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    border-radius: 0 6px 6px 0;
+}
+
+/* Nested sub-groups */
+.sub-group .sub-group {
+    background: #f1f5f9;
+    border-left-color: #64748b;
+}
+
+/* Section Headers */
+.section-divider {
+    margin: 20px 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    color: #1e40af;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Radio/Checkbox styling */
+.form-field-wrapper input[type="radio"],
+.form-field-wrapper input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+/* Compact inline options */
+.inline-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.inline-options label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.inline-options label:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.inline-options input[type="radio"]:checked+span,
+.inline-options input[type="checkbox"]:checked+span {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* Status message */
+#modal-status-msg {
+    font-size: 12px;
+    color: #dc2626;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+/* Transfer Tree (legacy support) */
+.transfer-tree ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.transfer-tree li {
+    margin-bottom: 8px;
+}
+
+.transfer-tree ul ul {
+    padding-left: 20px;
+    margin-top: 5px;
+    border-left: 2px solid #ebeff3;
+}
+
+/* Required asterisk */
+.required-asterisk {
+    color: #dc2626;
+    margin-left: 2px;
+}
+
+/* Compact select groups */
+.compact-select-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.compact-select-group .form-field-wrapper {
+    margin-bottom: 0;
+}

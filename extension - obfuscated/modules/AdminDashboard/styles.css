@@ -1,0 +1,475 @@
+/* Infinite Canvas Extension Styles */
+
+/* Canvas Container */
+#rp-infinite-canvas {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    width: calc(100vw - 260px);
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    z-index: 900;
+    overscroll-behavior: none;
+    /* Prevent browser back/forward on swipe */
+    touch-action: none;
+    /* Disable browser touch gestures */
+}
+
+/* Prevent browser swipe navigation when canvas mode is active */
+html.rp-canvas-mode,
+body.rp-canvas-mode {
+    overscroll-behavior-x: none !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-y pinch-zoom !important;
+}
+
+#rp-canvas-world {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
+
+/* Hide all action buttons inside canvas cards when in canvas mode */
+body.rp-canvas-mode .rp-entity-card button:not(.rp-close-btn) {
+    display: none !important;
+}
+
+/* Hide sidebar, header, and Actions section when in canvas mode */
+body.rp-canvas-mode>.app-container>aside.admin-sidebar,
+body.rp-canvas-mode>.app-container>header,
+body.rp-canvas-mode aside.container,
+body.rp-canvas-mode .entity-page aside {
+    display: none !important;
+}
+
+/* Make canvas full width when sidebar is hidden */
+body.rp-canvas-mode #rp-infinite-canvas {
+    left: 0 !important;
+    width: 100vw !important;
+}
+
+/* Ensure settings modal buttons are ALWAYS visible */
+#rp-settings-modal button {
+    display: inline-flex !important;
+}
+
+#rp-save-settings {
+    display: block !important;
+}
+
+
+/* Cards */
+.rp-entity-card {
+    position: absolute;
+    min-width: 400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e0e6ed;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.rp-entity-card.selected {
+    border-color: #3498db;
+    box-shadow: 0 8px 35px rgba(52, 152, 219, 0.25);
+}
+
+.rp-card-header {
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #fafbfc 0%, #f0f3f6 100%);
+    border-bottom: 1px solid #e8ecf0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: #2c3e50;
+    cursor: grab;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.rp-card-header:active {
+    cursor: grabbing;
+}
+
+.rp-close-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #7f8c8d;
+    font-size: 14px;
+    transition: all 0.15s;
+}
+
+.rp-close-btn:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.rp-card-body {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    background: #fff;
+}
+
+.rp-iframe-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    position: relative;
+}
+
+/* Block pointer events on non-selected cards */
+.rp-iframe-wrapper.blocked::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 10;
+}
+
+.rp-iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+}
+
+/* Custom Resize Handle */
+.rp-resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg, transparent 50%, #bdc3c7 50%, #bdc3c7 60%, transparent 60%, transparent 70%, #bdc3c7 70%, #bdc3c7 80%, transparent 80%);
+    border-radius: 0 0 10px 0;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+}
+
+.rp-resize-handle:hover {
+    opacity: 1;
+}
+
+/* Dimension Tooltip */
+#rp-dimension-tooltip {
+    position: fixed;
+    display: none;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', Consolas, monospace;
+    letter-spacing: 0.5px;
+    z-index: 100000;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    animation: tooltipFadeIn 0.15s ease;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Control Buttons */
+#rp-canvas-controls {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 12px;
+    z-index: 10000;
+    align-items: center;
+}
+
+/* Zoom Slider */
+.rp-zoom-slider {
+    padding: 8px 14px !important;
+    display: none !important;
+}
+
+body.rp-canvas-mode .rp-zoom-slider {
+    display: flex !important;
+}
+
+.rp-zoom-slider input[type="range"] {
+    width: 100px;
+    height: 4px;
+    -webkit-appearance: none;
+    background: #e0e6ed;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.rp-zoom-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#rp-zoom-value {
+    font-size: 12px;
+    color: #7f8c8d;
+    min-width: 40px;
+    text-align: right;
+}
+
+.rp-control-btn {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    border: 1px solid #e0e6ed;
+}
+
+.rp-control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.rp-control-btn.active {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    border-color: #27ae60;
+}
+
+#rp-canvas-settings {
+    padding: 12px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+}
+
+/* Settings Modal */
+#rp-settings-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 10001;
+    justify-content: center;
+    align-items: center;
+}
+
+.rp-settings-content {
+    background: white;
+    width: 520px;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.rp-settings-content h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #1a1a2e;
+}
+
+.rp-setting-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2c3e50;
+}
+
+.rp-size-inputs {
+    display: flex;
+    gap: 16px;
+}
+
+.input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.input-wrap span {
+    font-size: 12px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.input-wrap input,
+.rp-add-rule input {
+    padding: 10px 14px;
+    border: 1px solid #dce4ec;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-wrap input:focus,
+.rp-add-rule input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    outline: none;
+}
+
+.rp-rule-list {
+    border: 1px solid #ecf0f3;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.rp-rule-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border: 1px solid #e8ecf0;
+}
+
+.rp-rule-item:last-child {
+    margin-bottom: 0;
+}
+
+.rp-find {
+    color: #e74c3c;
+    font-weight: 500;
+    flex: 1;
+    word-break: break-all;
+}
+
+.rp-replace {
+    color: #27ae60;
+    font-weight: 500;
+    flex: 1;
+    word-break: break-all;
+}
+
+.rp-rule-del {
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.5;
+    padding: 4px 8px !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
+.rp-rule-del:hover {
+    opacity: 1;
+}
+
+.rp-add-rule {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    align-items: stretch;
+}
+
+.rp-add-rule input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Modal Button Styling - Complete Redesign */
+#rp-settings-modal .rp-modal-actions {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #ecf0f3;
+}
+
+#rp-add-rule-btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    line-height: 1.4;
+}
+
+#rp-add-rule-btn:hover {
+    background-color: #2980b9;
+}
+
+#rp-save-settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    letter-spacing: 0.3px;
+}
+
+#rp-save-settings:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+}
+
+#rp-save-settings:active {
+    transform: translateY(0);
+}

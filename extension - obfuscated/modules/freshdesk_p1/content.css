@@ -1,0 +1,110 @@
+/* --- List Page Timers --- */
+.p1-timer-container {
+    font-size: 11px;
+    margin-top: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* --- Details Page Timer --- */
+.p1-timer-details-property {
+    /* Mimic Freshdesk property fields */
+    padding: 10px 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid;
+    display: block !important;
+    box-sizing: border-box;
+    /* Added for consistency */
+}
+
+.p1-timer-details-property .timer-label {
+    font-weight: 600;
+    color: #475867;
+    /* Freshdesk label grey */
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.p1-timer-details-property .timer-value {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* --- Shared Color States (Applied to both list and details) --- */
+.p1-timer-due,
+.p1-timer-details-property.p1-timer-due {
+    background-color: #e0f5f1;
+    /* Light green */
+    color: #008969;
+    /* Dark green */
+    border-color: #b4e5da;
+}
+
+.p1-timer-breached,
+.p1-timer-details-property.p1-timer-breached {
+    background-color: #ffecf0;
+    /* Light red */
+    color: #c82124;
+    /* Dark red */
+    border-color: #ffd0d6;
+}
+
+.p1-timer-given,
+.p1-timer-details-property.p1-timer-given {
+    background-color: #e5f2fd;
+    /* Light blue */
+    color: #2c5cc5;
+    /* Dark blue */
+    border-color: #bbdcfe;
+}
+
+.p1-timer-paused,
+.p1-timer-details-property.p1-timer-paused {
+    background-color: #fef1e1;
+    /* Light orange/yellow */
+    color: #e86f25;
+    /* Dark orange */
+    border-color: #fddbb5;
+    font-style: italic;
+}
+
+.p1-timer-loading,
+.p1-timer-details-property.p1-timer-loading {
+    background-color: #ebeff3;
+    /* Light grey */
+    color: #475867;
+    /* Dark grey */
+    border-color: #cfd7df;
+    font-style: italic;
+}
+
+.p1-timer-error,
+.p1-timer-details-property.p1-timer-error {
+    background-color: #fef1e1;
+    /* Light orange */
+    color: #e86f25;
+    /* Dark orange */
+    border-color: #fddbb5;
+    font-style: italic;
+}
+
+/* --- P2 Timer (Yellow/Green) --- */
+.p1-timer-p2-due,
+.p1-timer-details-property.p1-timer-p2-due {
+    background-color: #f6fee5;
+    /* Light yellowish green */
+    color: #84cc16;
+    /* Lime green */
+    border-color: #bef264;
+    font-weight: 700;
+}

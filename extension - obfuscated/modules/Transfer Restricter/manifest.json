@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Freshdesk Transfer Restricter",
+  "version": "1.0",
+  "description": "Restricts transfer actions in Freshdesk until specific notes are added.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://jhaashish-max.github.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://razorpay-ind.freshdesk.com/a/tickets/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "form_data.json",
+        "status_form_data.json"
+      ],
+      "matches": [
+        "https://razorpay-ind.freshdesk.com/*"
+      ]
+    }
+  ]
+}

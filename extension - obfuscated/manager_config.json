@@ -1,0 +1,214 @@
+{
+    "modules": {
+        "meeting_tracker": {
+            "background": true,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "<all_urls>"
+                        ],
+                        "js": [
+                            "modules/meeting_tracker/injected.js"
+                        ],
+                        "run_at": "document_start",
+                        "all_frames": true,
+                        "world": "MAIN"
+                    },
+                    {
+                        "matches": [
+                            "<all_urls>"
+                        ],
+                        "js": [
+                            "modules/meeting_tracker/content.js"
+                        ],
+                        "run_at": "document_start",
+                        "all_frames": true
+                    }
+                ],
+                "web_accessible_resources": [
+                    {
+                        "resources": [
+                            "modules/meeting_tracker/injected.js"
+                        ],
+                        "matches": [
+                            "<all_urls>"
+                        ]
+                    }
+                ]
+            }
+        },
+        "Ask_Ai": {
+            "background": true,
+            "manifest": {
+                "content_scripts": [],
+                "web_accessible_resources": []
+            }
+        },
+        "AI_summary": {
+            "background": false,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://*.freshdesk.com/*"
+                        ],
+                        "js": [
+                            "modules/AI_summary/content.js"
+                        ],
+                        "css": [
+                            "modules/AI_summary/styles.css"
+                        ],
+                        "run_at": "document_end"
+                    }
+                ],
+                "web_accessible_resources": []
+            }
+        },
+        "Daily_Tracker": {
+            "background": true,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://*.freshdesk.com/*"
+                        ],
+                        "js": [
+                            "modules/Daily_Tracker/content.js"
+                        ],
+                        "css": [
+                            "modules/Daily_Tracker/styles.css"
+                        ],
+                        "run_at": "document_end"
+                    }
+                ],
+                "web_accessible_resources": [
+                    {
+                        "resources": [
+                            "modules/Daily_Tracker/styles.css"
+                        ],
+                        "matches": [
+                            "<all_urls>"
+                        ]
+                    }
+                ]
+            }
+        },
+        "AdminDashboard": {
+            "background": false,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://admin-dashboard.razorpay.com/admin/entity/*"
+                        ],
+                        "js": [
+                            "modules/AdminDashboard/content.js"
+                        ],
+                        "css": [
+                            "modules/AdminDashboard/styles.css"
+                        ],
+                        "all_frames": false
+                    }
+                ],
+                "web_accessible_resources": []
+            }
+        },
+        "Bulk_qr_close": {
+            "background": false,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://admin-dashboard.razorpay.com/*"
+                        ],
+                        "js": [
+                            "modules/Bulk_qr_close/xlsx.full.min.js",
+                            "modules/Bulk_qr_close/content.js"
+                        ]
+                    }
+                ],
+                "web_accessible_resources": []
+            }
+        },
+        "Transfer Restricter": {
+            "background": true,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://razorpay-ind.freshdesk.com/a/tickets/*"
+                        ],
+                        "js": [
+                            "modules/Transfer Restricter/content.js"
+                        ],
+                        "css": [
+                            "modules/Transfer Restricter/style.css"
+                        ],
+                        "run_at": "document_end"
+                    }
+                ],
+                "web_accessible_resources": [
+                    {
+                        "resources": [
+                            "modules/Transfer Restricter/form_data.json",
+                            "modules/Transfer Restricter/status_form_data.json"
+                        ],
+                        "matches": [
+                            "https://razorpay-ind.freshdesk.com/*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "Gmeet": {
+            "background": true,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://*.freshdesk.com/*"
+                        ],
+                        "js": [
+                            "modules/Gmeet/content.js"
+                        ],
+                        "css": [
+                            "modules/Gmeet/style.css"
+                        ],
+                        "run_at": "document_end"
+                    }
+                ],
+                "web_accessible_resources": []
+            }
+        },
+        "freshdesk_p1": {
+            "background": true,
+            "manifest": {
+                "content_scripts": [
+                    {
+                        "matches": [
+                            "https://razorpay-ind.freshdesk.com/a/tickets*"
+                        ],
+                        "js": [
+                            "modules/freshdesk_p1/utils.js",
+                            "modules/freshdesk_p1/content.js"
+                        ],
+                        "css": [
+                            "modules/freshdesk_p1/content.css"
+                        ]
+                    }
+                ],
+                "web_accessible_resources": [
+                    {
+                        "resources": [
+                            "modules/freshdesk_p1/icon.png"
+                        ],
+                        "matches": [
+                            "<all_urls>"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

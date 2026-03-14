@@ -1,0 +1,535 @@
+/* --- Global Reset --- */
+.rzp-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 6px;
+    padding: 6px 12px !important;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.rzp-nav-btn:hover {
+    background: #fff !important;
+    border-color: #2c5cc5 !important;
+}
+
+/* --- Backdrop (Blur) --- */
+.rzp-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(18, 52, 77, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.rzp-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- Dashboard Sidebar --- */
+#rzp-dashboard-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 480px;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 9999;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    border-left: 1px solid #e6e6e6;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#rzp-dashboard-overlay.open {
+    transform: translateX(0);
+}
+
+/* --- Header Area --- */
+.rzp-header {
+    background: #fff;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.rzp-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #12344d;
+    font-weight: 700;
+}
+
+/* Search Bar */
+.rzp-search-wrapper {
+    position: relative;
+    width: 220px;
+}
+
+#rzp-search-input {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    border: 1px solid #cfd7df;
+    border-radius: 20px;
+    font-size: 13px;
+    outline: none;
+    background: #fdfdfd;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+#rzp-search-input:focus {
+    border-color: #2c5cc5;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(44, 92, 197, 0.1);
+}
+
+.rzp-search-icon-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.rzp-search-icon-close:hover {
+    background: #eee;
+    color: #333;
+}
+
+/* Search Dropdown */
+.rzp-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 260px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+    display: none;
+}
+
+.rzp-search-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.rzp-search-item:hover {
+    background: #f5f9fc;
+}
+
+.rzp-search-item b {
+    display: block;
+    font-size: 14px;
+    color: #12344d;
+    margin-bottom: 2px;
+}
+
+.rzp-search-item small {
+    color: #829c9e;
+    font-size: 12px;
+}
+
+/* Reset Bar */
+#rzp-reset-view {
+    background: #e5f2fd;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #12344d;
+    border-bottom: 1px solid #d4e8fc;
+    flex-shrink: 0;
+}
+
+#rzp-back-btn {
+    background: #fff;
+    border: 1px solid #2c5cc5;
+    color: #2c5cc5;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+#rzp-back-btn:hover {
+    background: #2c5cc5;
+    color: #fff;
+}
+
+/* --- Content Body --- */
+.rzp-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    background: #f8f9fa;
+}
+
+.rzp-loader {
+    text-align: center;
+    color: #647a8e;
+    margin-top: 50px;
+    font-weight: 500;
+}
+
+.rzp-error {
+    text-align: center;
+    color: #d72d30;
+    margin-top: 50px;
+    background: #fff5f5;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #fcbcbe;
+}
+
+/* --- Ticket Row Design --- */
+.rzp-ticket-row {
+    background: #fff;
+    border: 1px solid #ebeff3;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: stretch;
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.rzp-ticket-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(18, 52, 77, 0.08);
+    border-color: #bbdcfe;
+}
+
+.past-meeting {
+    opacity: 0.6;
+    background: #fafafa;
+}
+
+.past-meeting:hover {
+    opacity: 1;
+}
+
+.active-meeting {
+    border-left: 4px solid #00b894;
+}
+
+/* Date Block (Left) */
+.rzp-date-block {
+    width: 70px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fcfcfc;
+    border-right: 1px solid #ebeff3;
+    padding: 10px;
+}
+
+.rzp-d-day {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #92a2b1;
+    margin-bottom: 2px;
+    line-height: 1;
+}
+
+.rzp-d-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #12344d;
+    line-height: 1.2;
+}
+
+.rzp-d-month {
+    font-size: 11px;
+    color: #475867;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+/* Info Block (Middle) */
+.rzp-info-block {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.rzp-time-badge {
+    font-size: 11px;
+    color: #2c5cc5;
+    background: #e5f2fd;
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 6px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #00b894;
+    border-radius: 50%;
+}
+
+.rzp-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #12344d;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rzp-organizer {
+    font-size: 12px;
+    color: #647a8e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rzp-avatar {
+    width: 18px;
+    height: 18px;
+    background: #ffd600;
+    color: #333;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Action Block (Right) */
+.rzp-action-block {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rzp-btn {
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.rzp-btn-primary {
+    background: #2c5cc5;
+    color: #fff;
+    border: 1px solid #2c5cc5;
+    box-shadow: 0 2px 4px rgba(44, 92, 197, 0.2);
+}
+
+.rzp-btn-primary:hover {
+    background: #1b449c;
+    border-color: #1b449c;
+}
+
+.rzp-btn-secondary {
+    background: #fff;
+    color: #475867;
+    border: 1px solid #cfd7df;
+}
+
+.rzp-btn-secondary:hover {
+    background: #f5f7f9;
+    border-color: #b3c1d1;
+    color: #12344d;
+}
+
+/* Empty State */
+.rzp-empty {
+    margin-top: 100px;
+    text-align: center;
+    color: #475867;
+}
+
+/* --- Flash Notification --- */
+.rzp-flash-card {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    background: #4834d4;
+    /* NEW COLOR: Deep Indigo/Blurple */
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    display: flex !important;
+    align-items: center;
+    gap: 16px;
+    z-index: 2147483647 !important;
+    /* Maximum possible z-index */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-width: 320px;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rzp-flash-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    min-width: 50px;
+}
+
+.rzp-flash-clock {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.rzp-flash-left span {
+    font-size: 9px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+.rzp-flash-mid {
+    flex: 1;
+    overflow: hidden;
+}
+
+.rzp-flash-mid h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rzp-flash-mid p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.rzp-flash-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rzp-flash-join {
+    background: #fff;
+    color: #4834d4;
+    /* Matches bg */
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.rzp-flash-join:hover {
+    transform: scale(1.05);
+}
+
+.rzp-flash-dismiss {
+    cursor: pointer;
+    opacity: 0.6;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.rzp-flash-dismiss:hover {
+    opacity: 1;
+}
+
+/* Animations */
+.rzp-slide-in-right {
+    animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rzp-slide-out-right {
+    animation: slideOutRight 0.5s forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
