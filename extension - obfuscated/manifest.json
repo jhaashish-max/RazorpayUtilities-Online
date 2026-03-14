@@ -1,13 +1,14 @@
 {
     "manifest_version": 3,
     "name": "Unified Workspace Tools",
-    "version": "6.1.9",
+    "version": "6.1.10",
     "update_url": "https://raw.githubusercontent.com/jhaashish-max/RazorpayUtilities-Online/main/update.xml",
     "description": "Combined suite containing Freshdesk Call Tracker and P1 Timer.",
     "permissions": [
         "storage",
         "activeTab",
         "alarms",
+        "notifications",
         "webRequest",
         "scripting"
     ],
