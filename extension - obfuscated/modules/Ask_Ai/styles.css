@@ -36,7 +36,7 @@
 }
 
 .ask-ai-fab.open svg {
-    transform: rotate(45deg);
+    transform: none;
 }
 
 @keyframes fabPulse {
