@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
   <app appid='gecjlklmadkhdiljmajjkhbmloklhnff'>
-    <updatecheck codebase='https://github.com/jhaashish-max/RazorpayUtilities-Online/releases/download/v6.1.6/extension.crx' version='6.1.6' />
+    <updatecheck codebase='https://github.com/jhaashish-max/RazorpayUtilities-Online/releases/download/v6.1.7/extension.crx' version='6.1.7' />
   </app>
 </gupdate>
