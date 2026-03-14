@@ -1,0 +1,13 @@
+{
+    "title": "Status Change Reason",
+    "items": [
+        {
+            "id": "status_reason",
+            "type": "textarea",
+            "label": "Reason for Status Change",
+            "name": "STATUS_CHANGE_REASON",
+            "required": true,
+            "placeholder": "Enter a brief reason for this status change..."
+        }
+    ]
+}

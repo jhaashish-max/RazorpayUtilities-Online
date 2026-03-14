@@ -1,0 +1,141 @@
+{
+    "manifest_version": 3,
+    "name": "Unified Workspace Tools",
+    "version": "6.1.5",
+    "update_url": "https://raw.githubusercontent.com/jhaashish-max/RazorpayUtilities-Online/main/update.xml",
+    "description": "Combined suite containing Freshdesk Call Tracker and P1 Timer.",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "alarms",
+        "webRequest",
+        "scripting"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.freshdesk.com/*"
+            ],
+            "js": [
+                "modules/AI_summary/content.js"
+            ],
+            "css": [
+                "modules/AI_summary/styles.css"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://admin-dashboard.razorpay.com/admin/entity/*"
+            ],
+            "js": [
+                "modules/AdminDashboard/content.js"
+            ],
+            "css": [
+                "modules/AdminDashboard/styles.css"
+            ],
+            "all_frames": false
+        },
+        {
+            "matches": [
+                "https://admin-dashboard.razorpay.com/*"
+            ],
+            "js": [
+                "modules/Bulk_qr_close/xlsx.full.min.js",
+                "modules/Bulk_qr_close/content.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://*.freshdesk.com/*"
+            ],
+            "js": [
+                "modules/Daily_Tracker/content.js"
+            ],
+            "css": [
+                "modules/Daily_Tracker/styles.css"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://*.freshdesk.com/*"
+            ],
+            "js": [
+                "modules/Gmeet/content.js"
+            ],
+            "css": [
+                "modules/Gmeet/style.css"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://razorpay-ind.freshdesk.com/a/tickets*"
+            ],
+            "js": [
+                "modules/freshdesk_p1/utils.js",
+                "modules/freshdesk_p1/content.js"
+            ],
+            "css": [
+                "modules/freshdesk_p1/content.css"
+            ]
+        },
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "modules/meeting_tracker/injected.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true,
+            "world": "MAIN"
+        },
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "modules/meeting_tracker/content.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "modules/Daily_Tracker/styles.css"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        },
+        {
+            "resources": [
+                "modules/freshdesk_p1/icon.png"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        },
+        {
+            "resources": [
+                "modules/meeting_tracker/injected.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "action": {
+        "default_title": "Unified Workspace Tools"
+    }
+}

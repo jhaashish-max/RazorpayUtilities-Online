@@ -1,0 +1,2200 @@
+{
+    "title": "Transfer Requirements",
+    "items": [
+        {
+            "id": "main_choice",
+            "type": "radio",
+            "label": "Select Option",
+            "name": "root_choice",
+            "required": true,
+            "options": [
+                {
+                    "label": "Note Already Exists in Ticket",
+                    "value": "existing",
+                    "subItems": []
+                },
+                {
+                    "label": "Transfer",
+                    "value": "transfer",
+                    "subItems": [
+                        {
+                            "id": "transfer_to",
+                            "type": "select",
+                            "label": "Transfer To",
+                            "name": "TRANSFER_TO",
+                            "required": true,
+                            "options": [
+                                {
+                                    "label": "Banking Ops",
+                                    "value": "banking_ops",
+                                    "subItems": [
+                                        {
+                                            "id": "bo_issue_label",
+                                            "type": "select",
+                                            "label": "Issue Label",
+                                            "name": "ISSUE_LABEL",
+                                            "required": true,
+                                            "options": [
+                                                {
+                                                    "label": "Terminal disablement",
+                                                    "value": "TERMINAL_DISABLEMENT",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_td_payment_method",
+                                                            "type": "select",
+                                                            "label": "Payment Method",
+                                                            "name": "PAYMENT_METHOD",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "upi",
+                                                                    "value": "upi",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_td_flow_type_upi",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "Intent",
+                                                                                    "value": "INTENT",
+                                                                                    "subItems": [
+                                                                                        {
+                                                                                            "id": "bo_td_subtype_intent",
+                                                                                            "type": "select",
+                                                                                            "label": "Subtype",
+                                                                                            "name": "SUBTYPE",
+                                                                                            "required": true,
+                                                                                            "options": [
+                                                                                                {
+                                                                                                    "label": "Onetime",
+                                                                                                    "value": "ONETIME",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Recurring(Initial)",
+                                                                                                    "value": "RECURRING_INITIAL",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Both",
+                                                                                                    "value": "BOTH",
+                                                                                                    "subItems": []
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "label": "Collect",
+                                                                                    "value": "COLLECT",
+                                                                                    "subItems": [
+                                                                                        {
+                                                                                            "id": "bo_td_subtype_collect",
+                                                                                            "type": "select",
+                                                                                            "label": "Subtype",
+                                                                                            "name": "SUBTYPE",
+                                                                                            "required": true,
+                                                                                            "options": [
+                                                                                                {
+                                                                                                    "label": "Onetime",
+                                                                                                    "value": "ONETIME",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Recurring(Initial)",
+                                                                                                    "value": "RECURRING_INITIAL",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Both",
+                                                                                                    "value": "BOTH",
+                                                                                                    "subItems": []
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "label": "Online(QR)",
+                                                                                    "value": "ONLINE_QR",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "card",
+                                                                    "value": "card",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_td_flow_type_card",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "Initial",
+                                                                                    "value": "card_initial",
+                                                                                    "subItems": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "Auto",
+                                                                                    "value": "card_auto",
+                                                                                    "subItems": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "both",
+                                                                                    "value": "card_both",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "emandate",
+                                                                    "value": "emandate",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_td_flow_type_emandate",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "Intial",
+                                                                                    "value": "emandate_initial",
+                                                                                    "subItems": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "Auto",
+                                                                                    "value": "emandate_auto",
+                                                                                    "subItems": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "Both",
+                                                                                    "value": "emandate_both",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "netbanking",
+                                                                    "value": "netbanking",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "emi",
+                                                                    "value": "emi",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "overall",
+                                                                    "value": "overall",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_td_impacted_terminal_id",
+                                                            "type": "text",
+                                                            "label": "Impacted Terminal ID",
+                                                            "name": "IMPACTED_TERMINAL_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_td_terminal_disablement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Disablement Required?",
+                                                            "name": "TERMINAL_DISABLEMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_td_disable_reason",
+                                                                            "type": "text",
+                                                                            "label": "Disable Reason",
+                                                                            "name": "DISABLE_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_td_procurement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Procurement Required",
+                                                            "name": "TERMINAL_PROCUREMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_td_procurement_reason",
+                                                                            "type": "text",
+                                                                            "label": "Reason",
+                                                                            "name": "PROCUREMENT_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_td_sample_payment_ids",
+                                                            "type": "text",
+                                                            "label": "Sample Payment IDs",
+                                                            "name": "SAMPLE_PAYMENT_IDS",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_td_sr",
+                                                            "type": "text",
+                                                            "label": "SR",
+                                                            "name": "SR",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_td_sr_reference",
+                                                            "type": "text",
+                                                            "label": "SR Reference",
+                                                            "name": "SR_REFERENCE",
+                                                            "required": true
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Blank Page post redirection(HDFC netbanking)",
+                                                    "value": "BLANK_PAGE_HDFC",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_bp_impacted_terminal_id",
+                                                            "type": "text",
+                                                            "label": "Impacted Terminal ID",
+                                                            "name": "IMPACTED_TERMINAL_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_bp_terminal_disablement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Disablement Required?",
+                                                            "name": "TERMINAL_DISABLEMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_bp_disable_reason",
+                                                                            "type": "text",
+                                                                            "label": "Disable Reason",
+                                                                            "name": "DISABLE_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_bp_procurement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Procurement Required",
+                                                            "name": "TERMINAL_PROCUREMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_bp_procurement_reason",
+                                                                            "type": "text",
+                                                                            "label": "Reason",
+                                                                            "name": "PROCUREMENT_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_bp_sr",
+                                                            "type": "text",
+                                                            "label": "SR",
+                                                            "name": "SR",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_bp_sr_reference",
+                                                            "type": "text",
+                                                            "label": "SR Reference",
+                                                            "name": "SR_REFERENCE",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_bp_short_description",
+                                                            "type": "text",
+                                                            "label": "Short Description",
+                                                            "name": "SHORT_DESCRIPTION",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_bp_sample_payment",
+                                                            "type": "text",
+                                                            "label": "Sample Payment",
+                                                            "name": "SAMPLE_PAYMENT",
+                                                            "required": true
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "VPA forbidden issue",
+                                                    "value": "VPA_FORBIDDEN",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_vpa_impacted_terminal_id",
+                                                            "type": "text",
+                                                            "label": "Impacted Terminal ID",
+                                                            "name": "IMPACTED_TERMINAL_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_vpa_terminal_disablement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Disablement Required?",
+                                                            "name": "TERMINAL_DISABLEMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_vpa_disable_reason",
+                                                                            "type": "text",
+                                                                            "label": "Disable Reason",
+                                                                            "name": "DISABLE_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_vpa_procurement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Procurement Required",
+                                                            "name": "TERMINAL_PROCUREMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_vpa_procurement_reason",
+                                                                            "type": "text",
+                                                                            "label": "Reason",
+                                                                            "name": "PROCUREMENT_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_vpa_failure_start_date",
+                                                            "type": "text",
+                                                            "label": "Failure Start Date",
+                                                            "name": "FAILURE_START_DATE",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_vpa_sample_payment_ids",
+                                                            "type": "text",
+                                                            "label": "Sample Payment IDs",
+                                                            "name": "SAMPLE_PAYMENT_IDS",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_vpa_sr",
+                                                            "type": "text",
+                                                            "label": "SR",
+                                                            "name": "SR",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_vpa_sr_reference",
+                                                            "type": "text",
+                                                            "label": "SR Reference",
+                                                            "name": "SR_REFERENCE",
+                                                            "required": true
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Failure with NTF",
+                                                    "value": "FAILURE_WITH_NTF",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_ntf_short_description",
+                                                            "type": "text",
+                                                            "label": "Short Description",
+                                                            "name": "SHORT_DESCRIPTION",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_payment_method",
+                                                            "type": "select",
+                                                            "label": "Payment Method",
+                                                            "name": "PAYMENT_METHOD",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "upi",
+                                                                    "value": "upi",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_flow_type_upi",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "Intent",
+                                                                                    "value": "INTENT",
+                                                                                    "subItems": [
+                                                                                        {
+                                                                                            "id": "bo_ntf_subtype_intent",
+                                                                                            "type": "select",
+                                                                                            "label": "Subtype",
+                                                                                            "name": "SUBTYPE",
+                                                                                            "required": true,
+                                                                                            "options": [
+                                                                                                {
+                                                                                                    "label": "Onetime",
+                                                                                                    "value": "ONETIME",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Recurring(Initial)",
+                                                                                                    "value": "RECURRING_INITIAL",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Both",
+                                                                                                    "value": "BOTH",
+                                                                                                    "subItems": []
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "label": "Collect",
+                                                                                    "value": "COLLECT",
+                                                                                    "subItems": [
+                                                                                        {
+                                                                                            "id": "bo_ntf_subtype_collect",
+                                                                                            "type": "select",
+                                                                                            "label": "Subtype",
+                                                                                            "name": "SUBTYPE",
+                                                                                            "required": true,
+                                                                                            "options": [
+                                                                                                {
+                                                                                                    "label": "Onetime",
+                                                                                                    "value": "ONETIME",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Recurring(Initial)",
+                                                                                                    "value": "RECURRING_INITIAL",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Both",
+                                                                                                    "value": "BOTH",
+                                                                                                    "subItems": []
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "label": "Online(QR)",
+                                                                                    "value": "ONLINE_QR",
+                                                                                    "subItems": [
+                                                                                        {
+                                                                                            "id": "bo_ntf_subtype_online",
+                                                                                            "type": "select",
+                                                                                            "label": "Subtype",
+                                                                                            "name": "SUBTYPE",
+                                                                                            "required": true,
+                                                                                            "options": [
+                                                                                                {
+                                                                                                    "label": "Onetime",
+                                                                                                    "value": "ONETIME",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Recurring(Initial)",
+                                                                                                    "value": "RECURRING_INITIAL",
+                                                                                                    "subItems": []
+                                                                                                },
+                                                                                                {
+                                                                                                    "label": "Both",
+                                                                                                    "value": "BOTH",
+                                                                                                    "subItems": []
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "card",
+                                                                    "value": "card",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_flow_type_card",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "NA",
+                                                                                    "value": "NA",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "emandate",
+                                                                    "value": "emandate",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_flow_type_emandate",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "NA",
+                                                                                    "value": "NA",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "netbanking",
+                                                                    "value": "netbanking",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_flow_type_nb",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "NA",
+                                                                                    "value": "NA",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "emi",
+                                                                    "value": "emi",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_flow_type_emi",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "NA",
+                                                                                    "value": "NA",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "overall",
+                                                                    "value": "overall",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_flow_type_overall",
+                                                                            "type": "select",
+                                                                            "label": "Flow Type",
+                                                                            "name": "FLOW_TYPE",
+                                                                            "required": true,
+                                                                            "options": [
+                                                                                {
+                                                                                    "label": "NA",
+                                                                                    "value": "NA",
+                                                                                    "subItems": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_impacted_terminal_id",
+                                                            "type": "text",
+                                                            "label": "Impacted Terminal ID",
+                                                            "name": "IMPACTED_TERMINAL_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_terminal_disablement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Disablement Required?",
+                                                            "name": "TERMINAL_DISABLEMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_disable_reason",
+                                                                            "type": "text",
+                                                                            "label": "Disable Reason",
+                                                                            "name": "DISABLE_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_procurement_req",
+                                                            "type": "select",
+                                                            "label": "Terminal Procurement Required",
+                                                            "name": "TERMINAL_PROCUREMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_procurement_reason",
+                                                                            "type": "text",
+                                                                            "label": "Reason",
+                                                                            "name": "PROCUREMENT_REASON",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_impacted_rule",
+                                                            "type": "select",
+                                                            "label": "Impacted due to Rule ID?",
+                                                            "name": "IMPACTED_DUE_TO_RULE_ID",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "bo_ntf_rule_desc",
+                                                                            "type": "text",
+                                                                            "label": "Rule ID Description",
+                                                                            "name": "RULE_ID_DESCRIPTION",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_sr",
+                                                            "type": "text",
+                                                            "label": "SR",
+                                                            "name": "SR",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_ntf_sr_reference",
+                                                            "type": "text",
+                                                            "label": "SR Reference",
+                                                            "name": "SR_REFERENCE",
+                                                            "required": true
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "FinOps",
+                                    "value": "finops",
+                                    "subItems": [
+                                        {
+                                            "id": "fo_scenario_type",
+                                            "type": "select",
+                                            "label": "Scenario Type",
+                                            "name": "SCENARIO_TYPE",
+                                            "required": true,
+                                            "options": [
+                                                {
+                                                    "label": "Payment Not Visible on Dashboard",
+                                                    "value": "PAYMENT_NOT_VISIBLE_ON_DASHBOARD",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "fo_pvn_payment_method",
+                                                            "type": "text",
+                                                            "label": "Payment Method",
+                                                            "name": "PAYMENT_METHOD",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_pvn_merchant_shared_utr",
+                                                            "type": "select",
+                                                            "label": "Merchant Shared UTR",
+                                                            "name": "MERCHANT_SHARED_UTR",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "f1h87vjnq",
+                                                                            "type": "text",
+                                                                            "label": "UTR:",
+                                                                            "name": "text_1769147484100",
+                                                                            "required": true
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_pvn_merchant_shared_details",
+                                                            "type": "select",
+                                                            "label": "Merchant Shared Payment Details",
+                                                            "name": "MERCHANT_SHARED_PAYMENT_DETAILS",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "fz8ztm8m3",
+                                                                            "type": "text",
+                                                                            "label": "Payment ID:",
+                                                                            "name": "text_1769147544382",
+                                                                            "required": false
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_pvn_logs_checked",
+                                                            "type": "select",
+                                                            "label": "Logs Checked",
+                                                            "name": "LOGS_CHECKED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_pvn_admin_dash_checked",
+                                                            "type": "select",
+                                                            "label": "Admin Dashboard Checked",
+                                                            "name": "ADMIN_DASHBOARD_CHECKED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_pvn_admin_entity_checked",
+                                                            "type": "select",
+                                                            "label": "Admin Entity Checked",
+                                                            "name": "ADMIN_ENTITY_CHECKED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "UPI",
+                                                                    "value": "UPI",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Fiscal",
+                                                                    "value": "FISCAL",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "None",
+                                                                    "value": "NONE",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Payment Status via UTR",
+                                                    "value": "PAYMENT_STATUS_VIA_UTR",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "fo_psu_payment_method",
+                                                            "type": "text",
+                                                            "label": "Payment Method",
+                                                            "name": "PAYMENT_METHOD",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_shared_utr",
+                                                            "type": "text",
+                                                            "label": "Shared UTR",
+                                                            "name": "SHARED_UTR",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_internal_logs",
+                                                            "type": "select",
+                                                            "label": "Internal Logs Checked",
+                                                            "name": "INTERNAL_LOGS_CHECKED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_logs_found",
+                                                            "type": "select",
+                                                            "label": "Payment Found in Logs",
+                                                            "name": "PAYMENT_FOUND_IN_LOGS",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "faghwl40w",
+                                                                            "type": "text",
+                                                                            "label": "Payment ID:",
+                                                                            "name": "text_1769147963549",
+                                                                            "required": false
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_admin_upi",
+                                                            "type": "select",
+                                                            "label": "Admin UPI Entity Checked",
+                                                            "name": "ADMIN_UPI_ENTITY_CHECKED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_upi_found",
+                                                            "type": "select",
+                                                            "label": "Payment Found in UPI Entity",
+                                                            "name": "PAYMENT_FOUND_IN_UPI_ENTITY",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_fiscal_checked",
+                                                            "type": "select",
+                                                            "label": "Payment UPI Fiscal Checked",
+                                                            "name": "PAYMENT_UP_FISCAL_CHECKED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_fiscal_found",
+                                                            "type": "select",
+                                                            "label": "Payment Found in Fiscal",
+                                                            "name": "PAYMENT_FOUND_IN_FISCAL",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "fdr2s40y0",
+                                                                            "type": "text",
+                                                                            "label": "Payment ID:",
+                                                                            "name": "text_1769148012217",
+                                                                            "required": false
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_psu_record_found",
+                                                            "type": "select",
+                                                            "label": "Record Found Anywhere",
+                                                            "name": "RECORD_FOUND_ANYWHERE",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "fty7t25gh",
+                                                                            "type": "text",
+                                                                            "label": "Details",
+                                                                            "name": "text_1769148023352",
+                                                                            "required": false
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Payment Stuck Created or Authorized",
+                                                    "value": "PAYMENT_STUCK_CREATED_OR_AUTHORIZED",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "fo_sca_payment_id",
+                                                            "type": "text",
+                                                            "label": "Payment ID",
+                                                            "name": "PAYMENT_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_sca_current_state",
+                                                            "type": "select",
+                                                            "label": "Payment Current State",
+                                                            "name": "PAYMENT_CURRENT_STATE",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Created",
+                                                                    "value": "CREATED",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Authorized",
+                                                                    "value": "AUTHORIZED",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_sca_capture_tat",
+                                                            "type": "select",
+                                                            "label": "Capture Setting TAT Breached",
+                                                            "name": "CAPTURE_SETTING_TAT_BREACHED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_sca_refund_tat",
+                                                            "type": "select",
+                                                            "label": "Auto Refund TAT Breached",
+                                                            "name": "AUTO_REFUND_TAT_BREACHED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_sca_funds_receipt",
+                                                            "type": "select",
+                                                            "label": "Funds Receipt Confirmed",
+                                                            "name": "FUNDS_RECEIPT_CONFIRMED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_sca_resolution",
+                                                            "type": "select",
+                                                            "label": "Main Ticket Resolution Based on FinOps",
+                                                            "name": "MAIN_TICKET_RESOLUTION_BASED_ON_FINOPS",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Refunded Payment Possible Chargeback",
+                                                    "value": "REFUNDED_PAYMENT_POSSIBLE_CHARGEBACK",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "fo_rpc_payment_id",
+                                                            "type": "text",
+                                                            "label": "Payment ID",
+                                                            "name": "PAYMENT_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_rpc_refund_id",
+                                                            "type": "text",
+                                                            "label": "Refund ID",
+                                                            "name": "REFUND_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_rpc_child_created",
+                                                            "type": "select",
+                                                            "label": "FinOps Child Ticket Created",
+                                                            "name": "FINOPS_CHILD_TICKET_CREATED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_rpc_fin_status",
+                                                            "type": "select",
+                                                            "label": "Financial Status Confirmed",
+                                                            "name": "FINANCIAL_STATUS_CONFIRMED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_rpc_cb_status",
+                                                            "type": "select",
+                                                            "label": "Chargeback Status Confirmed",
+                                                            "name": "CHARGEBACK_STATUS_CONFIRMED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Payment Not Migrated to NSS",
+                                                    "value": "PAYMENT_NOT_MIGRATED_TO_NSS",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "fo_nss_payment_id",
+                                                            "type": "text",
+                                                            "label": "Payment ID",
+                                                            "name": "PAYMENT_ID",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "fo_nss_balance",
+                                                            "type": "select",
+                                                            "label": "Balance ID Present",
+                                                            "name": "BALANCE_ID_PRESENT",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_nss_settled",
+                                                            "type": "select",
+                                                            "label": "Settled At Present",
+                                                            "name": "SETTLED_AT_PRESENT",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "fo_nss_child_id",
+                                                            "type": "text",
+                                                            "label": "FinOps Child Ticket ID",
+                                                            "name": "FINOPS_CHILD_TICKET_ID",
+                                                            "required": false
+                                                        },
+                                                        {
+                                                            "id": "fo_nss_manual",
+                                                            "type": "select",
+                                                            "label": "Manual NSS Migration Requested",
+                                                            "name": "MANUAL_NSS_MIGRATION_REQUESTED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "BizOps",
+                                    "value": "bizops",
+                                    "subItems": [
+                                        {
+                                            "id": "bo_scenario_type",
+                                            "type": "select",
+                                            "label": "Scenario Type",
+                                            "name": "SCENARIO_TYPE",
+                                            "required": true,
+                                            "options": [
+                                                {
+                                                    "label": "Product Understanding or Feature Clarification",
+                                                    "value": "PRODUCT_UNDERSTANDING_OR_FEATURE_CLARIFICATION",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_puf_merchant_query",
+                                                            "type": "select",
+                                                            "label": "Merchant Query Description Present",
+                                                            "name": "MERCHANT_QUERY_DESCRIPTION_PRESENT",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_puf_product_context",
+                                                            "type": "select",
+                                                            "label": "Relevant Product Context Provided",
+                                                            "name": "RELEVANT_PRODUCT_CONTEXT_PROVIDED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_puf_doc_ref",
+                                                            "type": "select",
+                                                            "label": "Documentation Reference Available",
+                                                            "name": "DOCUMENTATION_REFERENCE_AVAILABLE",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_puf_doc_link",
+                                                            "type": "text",
+                                                            "label": "Documentation Link",
+                                                            "name": "DOCUMENTATION_LINK",
+                                                            "required": false
+                                                        },
+                                                        {
+                                                            "id": "bo_puf_routing_team",
+                                                            "type": "text",
+                                                            "label": "Routing Team",
+                                                            "name": "ROUTING_TEAM",
+                                                            "required": true,
+                                                            "options": [],
+                                                            "defaultValue": "BIZOPS",
+                                                            "readonly": true
+                                                        },
+                                                        {
+                                                            "id": "bo_puf_action_expected",
+                                                            "type": "text",
+                                                            "label": "BizOps Action Expected",
+                                                            "name": "BIZOPS_ACTION_EXPECTED",
+                                                            "required": true,
+                                                            "options": [],
+                                                            "defaultValue": "PRODUCT_EXPLANATION_AND_DOC_REFERENCE",
+                                                            "readonly": true
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Feature Enablement",
+                                                    "value": "FEATURE_ENABLEMENT",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_fe_feature_name",
+                                                            "type": "text",
+                                                            "label": "Feature Name",
+                                                            "name": "FEATURE_NAME",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_fe_enablement_req",
+                                                            "type": "select",
+                                                            "label": "Feature Enablement Required",
+                                                            "name": "FEATURE_ENABLEMENT_REQUIRED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_fe_prereq",
+                                                            "type": "select",
+                                                            "label": "Prerequisites Defined",
+                                                            "name": "PREREQUISITES_DEFINED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_fe_instructions",
+                                                            "type": "select",
+                                                            "label": "Step by Step Instructions Provided",
+                                                            "name": "STEP_BY_STEP_INSTRUCTIONS_PROVIDED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_fe_logs",
+                                                            "type": "select",
+                                                            "label": "Supporting Logs Attached",
+                                                            "name": "SUPPORTING_LOGS_ATTACHED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "NA",
+                                                                    "value": "NA",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_fe_evidence",
+                                                            "type": "select",
+                                                            "label": "Evidence of Requirement Present",
+                                                            "name": "EVIDENCE_OF_REQUIREMENT_PRESENT",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Detail Updation Request",
+                                                    "value": "DETAIL_UPDATION_REQUEST",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_dur_detail_type",
+                                                            "type": "select",
+                                                            "label": "Detail Type Requested",
+                                                            "name": "DETAIL_TYPE_REQUESTED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Email",
+                                                                    "value": "EMAIL",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Contact Number",
+                                                                    "value": "CONTACT_NUMBER",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Billing Label",
+                                                                    "value": "BILLING_LABEL",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Other",
+                                                                    "value": "OTHER_DETAIL",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_dur_confirmation",
+                                                            "type": "select",
+                                                            "label": "Merchant Confirmation Received",
+                                                            "name": "MERCHANT_CONFIRMATION_RECEIVED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_dur_verification",
+                                                            "type": "select",
+                                                            "label": "Verification Details Attached",
+                                                            "name": "VERIFICATION_DETAILS_ATTACHED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_dur_originated",
+                                                            "type": "select",
+                                                            "label": "Ticket Originated From BizOps",
+                                                            "name": "TICKET_ORIGINATED_FROM_BIZOPS",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_dur_triage",
+                                                            "type": "select",
+                                                            "label": "Initial Triage Done",
+                                                            "name": "INITIAL_TRIAGE_DONE",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_dur_blocker",
+                                                            "type": "select",
+                                                            "label": "Exact Blocker Identified",
+                                                            "name": "EXACT_BLOCKER_IDENTIFIED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": [
+                                                                        {
+                                                                            "id": "fbl13kdn0",
+                                                                            "type": "text",
+                                                                            "label": "Please mention if yes",
+                                                                            "name": "text_1769148461712",
+                                                                            "required": false
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_dur_ticket_routed",
+                                                            "type": "select",
+                                                            "label": "Ticket Routed to BizOps",
+                                                            "name": "TICKET_ROUTED_TO_BIZOPS",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Payment Method Enablement or Disablement",
+                                                    "value": "PAYMENT_METHOD_ENABLEMENT_OR_DISABLEMENT",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "bo_pme_payment_method",
+                                                            "type": "text",
+                                                            "label": "Payment Method",
+                                                            "name": "PAYMENT_METHOD",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "id": "bo_pme_request_type",
+                                                            "type": "select",
+                                                            "label": "Request Type",
+                                                            "name": "REQUEST_TYPE",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Enable",
+                                                                    "value": "ENABLE",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Disable",
+                                                                    "value": "DISABLE",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_pme_consent",
+                                                            "type": "select",
+                                                            "label": "Merchant Consent Received",
+                                                            "name": "MERCHANT_CONSENT_RECEIVED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_pme_justification",
+                                                            "type": "select",
+                                                            "label": "Business Justification Provided",
+                                                            "name": "BUSINESS_JUSTIFICATION_PROVIDED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_pme_compliance",
+                                                            "type": "select",
+                                                            "label": "Compliance Check Completed",
+                                                            "name": "COMPLIANCE_CHECK_COMPLETED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "bo_pme_eligibility",
+                                                            "type": "select",
+                                                            "label": "Eligibility Check Completed",
+                                                            "name": "ELIGIBILITY_CHECK_COMPLETED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Mission Team",
+                                    "value": "mission_team",
+                                    "subItems": [
+                                        {
+                                            "id": "mt_scenario_type",
+                                            "type": "select",
+                                            "label": "Scenario Type",
+                                            "name": "SCENARIO_TYPE",
+                                            "required": true,
+                                            "options": [
+                                                {
+                                                    "label": "Magic Checkout Issue",
+                                                    "value": "MAGIC_CHECKOUT_ISSUE",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "mt_mc_issue_cat",
+                                                            "type": "text",
+                                                            "label": "Issue Category",
+                                                            "name": "ISSUE_CATEGORY",
+                                                            "required": true,
+                                                            "options": [],
+                                                            "defaultValue": "MAGIC_CHECKOUT",
+                                                            "readonly": true
+                                                        },
+                                                        {
+                                                            "id": "mt_mc_routing_time",
+                                                            "type": "text",
+                                                            "label": "Routing Timeframe",
+                                                            "name": "ROUTING_TIMEFRAME",
+                                                            "required": false,
+                                                            "options": [],
+                                                            "defaultValue": "WITHIN_1_DAY",
+                                                            "readonly": true
+                                                        },
+                                                        {
+                                                            "id": "mt_mc_informed",
+                                                            "type": "select",
+                                                            "label": "Merchant Informed",
+                                                            "name": "MERCHANT_INFORMED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_mc_reason",
+                                                            "type": "select",
+                                                            "label": "Merchant Communication Reason Provided",
+                                                            "name": "MERCHANT_COMMUNICATION_REASON_PROVIDED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Cross Border Issue",
+                                                    "value": "CROSS_BORDER_ISSUE",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "mt_cb_issue_sub",
+                                                            "type": "select",
+                                                            "label": "Issue Sub Type",
+                                                            "name": "ISSUE_SUB_TYPE",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "International Payment Failure",
+                                                                    "value": "INTERNATIONAL_PAYMENT_FAILURE",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "VCIP",
+                                                                    "value": "VCIP",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "International Bank Transfer",
+                                                                    "value": "INTERNATIONAL_BANK_TRANSFER",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "FIRS/FIRC",
+                                                                    "value": "FIRS_FIRC",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "Other",
+                                                                    "value": "OTHER_INTL",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_cb_routed",
+                                                            "type": "select",
+                                                            "label": "Ticket Routed to Mission Tech",
+                                                            "name": "TICKET_ROUTED_TO_MISSION_TECH",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_cb_informed",
+                                                            "type": "select",
+                                                            "label": "Merchant Informed",
+                                                            "name": "MERCHANT_INFORMED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_cb_reason",
+                                                            "type": "select",
+                                                            "label": "Merchant Communication Reason Provided",
+                                                            "name": "MERCHANT_COMMUNICATION_REASON_PROVIDED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "RAAS Merchant Issue",
+                                                    "value": "RAAS_MERCHANT_ISSUE",
+                                                    "subItems": [
+                                                        {
+                                                            "id": "mt_raas_flag",
+                                                            "type": "select",
+                                                            "label": "RAAS Flag Present on MID",
+                                                            "name": "RAAS_FLAG_PRESENT_ON_MID",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_raas_rule_present",
+                                                            "type": "select",
+                                                            "label": "Live Rule Present",
+                                                            "name": "LIVE_RULE_PRESENT",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_raas_rule_enabled",
+                                                            "type": "select",
+                                                            "label": "Live Rule Enabled",
+                                                            "name": "LIVE_RULE_ENABLED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_raas_routed",
+                                                            "type": "select",
+                                                            "label": "Ticket Routed to Mission Tech",
+                                                            "name": "TICKET_ROUTED_TO_MISSION_TECH",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_raas_informed",
+                                                            "type": "select",
+                                                            "label": "Merchant Informed",
+                                                            "name": "MERCHANT_INFORMED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "mt_raas_reason",
+                                                            "type": "select",
+                                                            "label": "Merchant Communication Reason Provided",
+                                                            "name": "MERCHANT_COMMUNICATION_REASON_PROVIDED",
+                                                            "required": true,
+                                                            "options": [
+                                                                {
+                                                                    "label": "Yes",
+                                                                    "value": "YES",
+                                                                    "subItems": []
+                                                                },
+                                                                {
+                                                                    "label": "No",
+                                                                    "value": "NO",
+                                                                    "subItems": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Activations",
+                                    "value": "activation",
+                                    "subItems": [
+                                        {
+                                            "id": "f0wbodwev",
+                                            "type": "text",
+                                            "label": "Reason",
+                                            "name": "text_1769578040873",
+                                            "required": true
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "other",
+                    "value": "other",
+                    "subItems": []
+                }
+            ]
+        }
+    ]
+}

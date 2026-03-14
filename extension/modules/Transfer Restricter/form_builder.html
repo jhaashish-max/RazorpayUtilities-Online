@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Requirement Form Builder</title>
+    <style>
+        :root {
+            --primary: #2C5CC5;
+            --primary-light: #e8f0fe;
+            --bg: #f5f7f9;
+            --border: #d7d7d7;
+            --white: #ffffff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--white);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--white);
+            border-right: 1px solid var(--border);
+            padding: 16px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h3 {
+            margin: 0 0 8px 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+
+        .canvas {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #eaecef;
+        }
+
+        .canvas-content {
+            background: var(--white);
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 120px);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Tool Buttons */
+        .tool-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 4px;
+            background: #fff;
+            border: 1px solid var(--border);
+            text-align: left;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.15s;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .btn-primary:hover {
+            background: #224b9e;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        /* Tree View */
+        .tree-node {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .tree-node.collapsed>.node-children {
+            display: none;
+        }
+
+        .node-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            background: #fafafa;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            gap: 8px;
+        }
+
+        .node-header:hover {
+            background: #f0f4ff;
+        }
+
+        .collapse-btn {
+            width: 20px;
+            height: 20px;
+            border: none;
+            background: #e0e0e0;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .collapse-btn:hover {
+            background: #ccc;
+        }
+
+        .node-type {
+            font-size: 9px;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .node-type.radio {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .node-type.select {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .node-type.text {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .node-type.textarea {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .node-type.checkbox {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .node-type.section {
+            background: #eceff1;
+            color: #546e7a;
+        }
+
+        .node-type.option {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .node-label {
+            flex: 1;
+            font-weight: 500;
+            font-size: 13px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .node-meta {
+            font-size: 10px;
+            color: #888;
+            display: flex;
+            gap: 8px;
+        }
+
+        .node-meta .badge {
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 9px;
+        }
+
+        .badge-required {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .badge-count {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .node-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .node-actions button {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: #f5f5f5;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .node-actions button:hover {
+            background: #e0e0e0;
+        }
+
+        .node-actions button.delete:hover {
+            background: #ffcdd2;
+            color: var(--danger);
+        }
+
+        .node-body {
+            padding: 12px;
+            background: #fff;
+        }
+
+        .node-children {
+            padding: 12px;
+            padding-left: 24px;
+            background: #fafafa;
+            border-top: 1px solid #eee;
+        }
+
+        .node-children.options {
+            background: #fffde7;
+        }
+
+        /* Form Controls */
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 6px 8px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(44, 92, 197, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        /* Add Buttons */
+        .add-buttons {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            padding: 8px 0;
+        }
+
+        .add-btn {
+            font-size: 10px;
+            padding: 4px 8px;
+            border: 1px dashed #ccc;
+            background: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .add-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        /* JSON Output */
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            max-height: 300px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 11px;
+        }
+
+        .stats-bar .stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stats-bar .stat-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:20px;">🛡️</span>
+            <div>
+                <h1>Form Builder</h1>
+                <small style="color:#666;font-size:11px;">Transfer Restriction Forms</small>
+            </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+            <button class="btn-primary btn-success" onclick="showImportModal()">📥 Import</button>
+            <button class="btn-primary" onclick="generateJSON()">📤 Export JSON</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h3>Form Settings</h3>
+            <div class="form-group" style="margin-bottom:16px;">
+                <label>Form Title</label>
+                <input type="text" id="form-title" value="Transfer Requirements">
+            </div>
+
+            <h3>Add Root Field</h3>
+            <button class="tool-btn" onclick="addRootItem('radio')">🔘 Radio Group</button>
+            <button class="tool-btn" onclick="addRootItem('checkbox')">☑️ Checkbox</button>
+            <button class="tool-btn" onclick="addRootItem('text')">🔤 Text Input</button>
+            <button class="tool-btn" onclick="addRootItem('textarea')">📝 Text Area</button>
+            <button class="tool-btn" onclick="addRootItem('select')">🔽 Dropdown</button>
+            <button class="tool-btn" onclick="addRootItem('section')">📑 Section</button>
+
+            <div style="margin-top:16px;">
+                <h3>Actions</h3>
+                <button class="tool-btn" onclick="expandAll()">➕ Expand All</button>
+                <button class="tool-btn" onclick="collapseAll()">➖ Collapse All</button>
+            </div>
+        </div>
+
+        <div class="canvas">
+            <div class="canvas-content">
+                <div class="stats-bar" id="stats-bar"></div>
+                <div id="canvas-root"></div>
+                <div id="json-output" style="display:none;margin-top:20px;">
+                    <h3 style="font-size:14px;margin-bottom:8px;">Generated JSON</h3>
+                    <pre id="json-code"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let formData = { title: "Transfer Requirements", items: [] };
+
+        // Utility
+        function generateId() {
+            return 'f' + Math.random().toString(36).substr(2, 8);
+        }
+
+        function createField(type) {
+            const field = {
+                id: generateId(),
+                type: type,
+                label: type === 'section' ? 'New Section' : 'New Field',
+                name: `${type}_${Date.now()}`,
+                required: false
+            };
+            if (type === 'radio' || type === 'select') {
+                field.options = [];
+            }
+            if (type === 'checkbox') {
+                field.subItems = [];
+            }
+            return field;
+        }
+
+        function createOption(label = 'New Option', value = 'value') {
+            return { label, value, subItems: [] };
+        }
+
+        // Count all fields recursively
+        function countFields(items) {
+            let count = 0;
+            function traverse(arr) {
+                if (!arr) return;
+                arr.forEach(item => {
+                    count++;
+                    if (item.options) {
+                        item.options.forEach(opt => {
+                            if (opt.subItems) traverse(opt.subItems);
+                        });
+                    }
+                    if (item.subItems) traverse(item.subItems);
+                });
+            }
+            traverse(items);
+            return count;
+        }
+
+        // Update stats bar
+        function updateStats() {
+            const bar = document.getElementById('stats-bar');
+            const fieldCount = countFields(formData.items);
+            const rootCount = formData.items.length;
+            bar.innerHTML = `
+                <div class="stat">📋 Root Fields: <span class="stat-value">${rootCount}</span></div>
+                <div class="stat">🔢 Total Fields: <span class="stat-value">${fieldCount}</span></div>
+            `;
+        }
+
+        // Track collapsed state
+        let collapsedPaths = new Set();
+
+        // Save UI state before re-render
+        function saveUIState() {
+            const canvas = document.querySelector('.canvas');
+            const scrollTop = canvas ? canvas.scrollTop : 0;
+
+            // Save all collapsed paths
+            const collapsed = new Set();
+            document.querySelectorAll('.tree-node.collapsed').forEach(node => {
+                if (node.dataset.path) collapsed.add(node.dataset.path);
+            });
+            collapsedPaths = collapsed;
+
+            return { scrollTop };
+        }
+
+        // Restore UI state after re-render
+        function restoreUIState(state) {
+            // Restore collapsed states
+            collapsedPaths.forEach(path => {
+                const node = document.querySelector(`.tree-node[data-path="${path}"]`);
+                if (node) node.classList.add('collapsed');
+            });
+
+            // Restore scroll position
+            const canvas = document.querySelector('.canvas');
+            if (canvas && state.scrollTop) {
+                canvas.scrollTop = state.scrollTop;
+            }
+        }
+
+        // Main render
+        function render() {
+            const state = saveUIState();
+
+            const root = document.getElementById('canvas-root');
+            root.innerHTML = '';
+            updateStats();
+
+            if (formData.items.length === 0) {
+                root.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📋</div>
+                        <p>No fields yet. Add fields from the sidebar.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            formData.items.forEach((item, index) => {
+                root.appendChild(renderNode(item, [index]));
+            });
+
+            // Restore state after DOM is built
+            requestAnimationFrame(() => restoreUIState(state));
+        }
+
+        // Recursive node renderer
+        function renderNode(item, path, isOption = false) {
+            const node = document.createElement('div');
+            node.className = 'tree-node';
+            node.dataset.path = path.join('-');
+
+            const hasChildren = (item.options && item.options.length > 0) ||
+                (item.subItems && item.subItems.length > 0);
+
+            // Header
+            const header = document.createElement('div');
+            header.className = 'node-header';
+            header.onclick = (e) => {
+                if (e.target.closest('.node-actions') || e.target.closest('.collapse-btn')) return;
+                node.classList.toggle('collapsed');
+            };
+
+            const collapseBtn = hasChildren ? `<button class="collapse-btn" onclick="event.stopPropagation(); this.closest('.tree-node').classList.toggle('collapsed')">▼</button>` : '<div style="width:20px;"></div>';
+
+            const typeClass = isOption ? 'option' : item.type;
+            const label = isOption ? `${item.label} = ${item.value}` : item.label;
+            const subCount = (item.options?.length || 0) + (item.subItems?.length || 0);
+
+            let meta = '';
+            if (item.required) meta += '<span class="badge badge-required">REQ</span>';
+            if (subCount > 0) meta += `<span class="badge badge-count">${subCount} sub</span>`;
+
+            header.innerHTML = `
+                ${collapseBtn}
+                <span class="node-type ${typeClass}">${isOption ? 'OPT' : item.type}</span>
+                <span class="node-label" title="${label}">${label}</span>
+                <div class="node-meta">${meta}</div>
+                <div class="node-actions">
+                    ${path.length > 1 ? `<button onclick="moveNode('${path.join('-')}', -1)" title="Move Up">↑</button>` : ''}
+                    ${path.length > 1 ? `<button onclick="moveNode('${path.join('-')}', 1)" title="Move Down">↓</button>` : ''}
+                    <button class="delete" onclick="deleteNode('${path.join('-')}')" title="Delete">×</button>
+                </div>
+            `;
+            node.appendChild(header);
+
+            // Body (editable fields) - only for non-options
+            if (!isOption) {
+                const body = document.createElement('div');
+                body.className = 'node-body';
+                body.innerHTML = renderFieldEditor(item, path);
+                node.appendChild(body);
+            } else {
+                // Option editor (inline)
+                const body = document.createElement('div');
+                body.className = 'node-body';
+                body.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Label</label>
+                            <input type="text" value="${item.label}" onchange="updateNodeProp('${path.join('-')}', 'label', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Value</label>
+                            <input type="text" value="${item.value}" onchange="updateNodeProp('${path.join('-')}', 'value', this.value)">
+                        </div>
+                    </div>
+                `;
+                node.appendChild(body);
+            }
+
+            // Children container
+            if (item.options || item.subItems || isOption) {
+                const children = document.createElement('div');
+                children.className = 'node-children' + (item.options ? ' options' : '');
+
+                // Render options
+                if (item.options) {
+                    item.options.forEach((opt, i) => {
+                        const optPath = [...path, 'opt', i];
+                        children.appendChild(renderNode(opt, optPath, true));
+                    });
+                    children.innerHTML += `
+                        <div class="add-buttons">
+                            <button class="add-btn" onclick="addOption('${path.join('-')}')">+ Add Option</button>
+                        </div>
+                    `;
+                }
+
+                // Render subItems (for checkboxes or option subItems)
+                if (item.subItems) {
+                    item.subItems.forEach((sub, i) => {
+                        const subPath = [...path, 'sub', i];
+                        children.appendChild(renderNode(sub, subPath, false));
+                    });
+                    children.innerHTML += `
+                        <div class="add-buttons">
+                            <button class="add-btn" onclick="addSubItem('${path.join('-')}', 'text')">+ Text</button>
+                            <button class="add-btn" onclick="addSubItem('${path.join('-')}', 'select')">+ Dropdown</button>
+                            <button class="add-btn" onclick="addSubItem('${path.join('-')}', 'checkbox')">+ Checkbox</button>
+                            <button class="add-btn" onclick="addSubItem('${path.join('-')}', 'radio')">+ Radio</button>
+                            <button class="add-btn" onclick="addSubItem('${path.join('-')}', 'textarea')">+ Textarea</button>
+                        </div>
+                    `;
+                }
+
+                if (children.childNodes.length > 0) {
+                    node.appendChild(children);
+                }
+            }
+
+            return node;
+        }
+
+        function renderFieldEditor(item, path) {
+            const pathStr = path.join('-');
+            let html = `
+                <div class="form-row">
+                    <div class="form-group" style="flex:2;">
+                        <label>Label</label>
+                        <input type="text" value="${item.label}" onchange="updateNodeProp('${pathStr}', 'label', this.value)">
+                    </div>
+                    <div class="form-group" style="flex:2;">
+                        <label>Field Name</label>
+                        <input type="text" value="${item.name || ''}" onchange="updateNodeProp('${pathStr}', 'name', this.value)">
+                    </div>
+                </div>
+            `;
+
+            if (item.type !== 'section') {
+                html += `
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" ${item.required ? 'checked' : ''} onchange="updateNodeProp('${pathStr}', 'required', this.checked)"> Required</label>
+                    </div>
+                `;
+            }
+
+            if (item.type === 'text' || item.type === 'textarea') {
+                html += `
+                    <div class="form-row" style="margin-top:8px;">
+                        <div class="form-group">
+                            <label>Validation Regex</label>
+                            <input type="text" value="${item.validation || ''}" placeholder="e.g. ^[A-Z]+" onchange="updateNodeProp('${pathStr}', 'validation', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Default Value</label>
+                            <input type="text" value="${item.defaultValue || ''}" onchange="updateNodeProp('${pathStr}', 'defaultValue', this.value)">
+                        </div>
+                    </div>
+                `;
+            }
+
+            return html;
+        }
+
+        // Path navigation helpers
+        function getNodeByPath(pathStr) {
+            const parts = pathStr.split('-');
+            let current = formData.items;
+            let node = null;
+            let parent = null;
+            let parentKey = null;
+            let index = null;
+
+            for (let i = 0; i < parts.length; i++) {
+                if (parts[i] === 'opt') {
+                    parent = node;
+                    parentKey = 'options';
+                    index = parseInt(parts[++i]);
+                    current = node.options;
+                    node = current[index];
+                } else if (parts[i] === 'sub') {
+                    parent = node;
+                    parentKey = 'subItems';
+                    index = parseInt(parts[++i]);
+                    current = node.subItems;
+                    node = current[index];
+                } else {
+                    index = parseInt(parts[i]);
+                    if (node === null) {
+                        parent = formData;
+                        parentKey = 'items';
+                        current = formData.items;
+                    }
+                    node = current[index];
+                }
+            }
+            return { node, parent, parentKey, index, current };
+        }
+
+        // Actions
+        function addRootItem(type) {
+            formData.items.push(createField(type));
+            render();
+        }
+
+        function addOption(pathStr) {
+            const { node } = getNodeByPath(pathStr);
+            if (!node.options) node.options = [];
+            node.options.push(createOption());
+            render();
+        }
+
+        function addSubItem(pathStr, type) {
+            const { node } = getNodeByPath(pathStr);
+            if (!node.subItems) node.subItems = [];
+            node.subItems.push(createField(type));
+            render();
+        }
+
+        function updateNodeProp(pathStr, key, value) {
+            const { node } = getNodeByPath(pathStr);
+            node[key] = value;
+            // Don't re-render on every keystroke for performance
+        }
+
+        function deleteNode(pathStr) {
+            if (!confirm('Delete this item and all its children?')) return;
+            const { parent, parentKey, index } = getNodeByPath(pathStr);
+            parent[parentKey].splice(index, 1);
+            render();
+        }
+
+        function moveNode(pathStr, direction) {
+            const { parent, parentKey, index } = getNodeByPath(pathStr);
+            const arr = parent[parentKey];
+            const newIndex = index + direction;
+            if (newIndex < 0 || newIndex >= arr.length) return;
+            [arr[index], arr[newIndex]] = [arr[newIndex], arr[index]];
+            render();
+        }
+
+        function expandAll() {
+            document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('collapsed'));
+        }
+
+        function collapseAll() {
+            document.querySelectorAll('.tree-node').forEach(n => n.classList.add('collapsed'));
+        }
+
+        // Import/Export
+        function generateJSON() {
+            formData.title = document.getElementById('form-title').value;
+            document.getElementById('json-output').style.display = 'block';
+            document.getElementById('json-code').textContent = JSON.stringify(formData, null, 2);
+        }
+
+        function showImportModal() {
+            const overlay = document.createElement('div');
+            overlay.id = 'import-modal';
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
+            overlay.innerHTML = `
+                <div style="background:#fff;padding:24px;border-radius:8px;width:700px;max-width:95%;max-height:80vh;overflow:auto;">
+                    <h3 style="margin:0 0 16px 0;">📥 Import Form JSON</h3>
+                    <textarea id="import-textarea" style="width:100%;height:300px;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:monospace;font-size:11px;" placeholder='Paste your form_data.json content here...'></textarea>
+                    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px;">
+                        <button onclick="document.getElementById('import-modal').remove()" style="padding:8px 16px;border:1px solid #ddd;background:#fff;border-radius:4px;cursor:pointer;">Cancel</button>
+                        <button onclick="importJSON()" style="padding:8px 16px;border:none;background:#28a745;color:#fff;border-radius:4px;cursor:pointer;">Import</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        function importJSON() {
+            const text = document.getElementById('import-textarea').value.trim();
+            if (!text) { alert('Please paste JSON content.'); return; }
+            try {
+                const data = JSON.parse(text);
+                if (!data.title && !data.items) throw new Error('Invalid structure');
+                formData = { title: data.title || 'Imported Form', items: data.items || [] };
+                document.getElementById('form-title').value = formData.title;
+                document.getElementById('import-modal').remove();
+                render();
+                alert(`Imported ${countFields(formData.items)} fields successfully!`);
+            } catch (e) {
+                alert('Error parsing JSON: ' + e.message);
+            }
+        }
+
+        // Initial render
+        render();
+    </script>
+</body>
+
+</html>
