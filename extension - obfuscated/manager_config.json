@@ -38,13 +38,6 @@
                 ]
             }
         },
-        "Ask_Ai": {
-            "background": true,
-            "manifest": {
-                "content_scripts": [],
-                "web_accessible_resources": []
-            }
-        },
         "AI_summary": {
             "background": false,
             "manifest": {
